@@ -25,6 +25,9 @@ app.use('/users', usersRouter);
 app.use('/logs', serveIndex(path.join(__dirname, 'public/logs'))); // shows you the file list
 app.use('/logs', express.static(path.join(__dirname, 'public/logs'))); // serve the actual files
 
+//to include images
+// app.use('/images', express.static('images'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
