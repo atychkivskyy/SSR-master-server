@@ -44,8 +44,19 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Server is running on port 3000');
+process.on('uncaughtException', (err) => {
+    console.error('Unhandled exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled rejection:', reason, 'at', promise);
+});
+
+const port = 3000;
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+}).on('error', (err) => {
+    console.error('Failed to start server:', err);
 });
 
 module.exports = app;
